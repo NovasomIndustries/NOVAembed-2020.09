@@ -743,14 +743,14 @@
       <widget class="QPushButton" name="ViewKernelLog_pushButton">
        <property name="geometry">
         <rect>
-         <x>290</x>
+         <x>240</x>
          <y>120</y>
-         <width>71</width>
+         <width>121</width>
          <height>21</height>
         </rect>
        </property>
        <property name="text">
-        <string>View log</string>
+        <string>View kernel log</string>
        </property>
       </widget>
       <widget class="QLabel" name="KernelStatus_label">
@@ -1439,14 +1439,14 @@
       <widget class="QPushButton" name="ViewFSLog_pushButton">
        <property name="geometry">
         <rect>
-         <x>220</x>
+         <x>200</x>
          <y>360</y>
-         <width>141</width>
+         <width>161</width>
          <height>21</height>
         </rect>
        </property>
        <property name="text">
-        <string>View file system  log</string>
+        <string>View File System  log</string>
        </property>
       </widget>
       <widget class="QPushButton" name="AddFileSystemConfig_pushButton">
@@ -1686,7 +1686,7 @@
         <rect>
          <x>9</x>
          <y>30</y>
-         <width>141</width>
+         <width>121</width>
          <height>21</height>
         </rect>
        </property>
@@ -2230,7 +2230,7 @@
       <widget class="QCheckBox" name="Compress_GPT_Image_checkBox">
        <property name="geometry">
         <rect>
-         <x>320</x>
+         <x>290</x>
          <y>410</y>
          <width>111</width>
          <height>23</height>
@@ -2261,9 +2261,9 @@
       <widget class="QPushButton" name="ViewuSDwriteLog_pushButton">
        <property name="geometry">
         <rect>
-         <x>320</x>
+         <x>290</x>
          <y>360</y>
-         <width>141</width>
+         <width>171</width>
          <height>21</height>
         </rect>
        </property>
