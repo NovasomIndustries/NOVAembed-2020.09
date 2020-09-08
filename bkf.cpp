@@ -409,8 +409,8 @@ void NOVAembed::on_KernelReCompile_pushButton_clicked()
             out << QString("    fi\n");
         }
         out << QString("fi\n");
-        out << QString("exit_ok\n");
     }
+    out << QString("exit_ok\n");
     scriptfile.close();
     if ( run_script() == 0)
     {
