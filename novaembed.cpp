@@ -1355,46 +1355,62 @@ void NOVAembed::on_CheckUpdate_pushButton_clicked()
     if ( gitVersion != Version )
     {
         out << QString("#!/bin/sh\n");
-        out << QString("cd "+instpath+"/Utils\n");
-        out << QString("echo 0 > /tmp/result\n");
+        out << QString("HERE=\""+instpath+"/Utils\"\n");
+        out << QString("cd ${HERE}\n");
+        out << QString(". ./functions.sh\n");
+        out << QString(". ./version\n");
+        out << QString("clear_resfile\n");
         out << QString("echo \"**********************************************\" >> "+instpath+"/Logs/update.log\n");
         out << QString("echo \"Update started on `date`\" >> "+instpath+"/Logs/update.log\n");
         out << QString("echo \"**********************************************\"  >> "+instpath+"/Logs/update.log\n");
         out << QString("./update_all >> "+instpath+"/Logs/update.log\n");
+        out << QString("exit_ok\n");
     }
 
     if ( gitToolsVersion != ToolsVersion )
     {
         out << QString("#!/bin/sh\n");
-        out << QString("cd "+instpath+"/Utils\n");
-        out << QString("echo 0 > /tmp/result\n");
+        out << QString("HERE=\""+instpath+"/Utils\"\n");
+        out << QString("cd ${HERE}\n");
+        out << QString(". ./functions.sh\n");
+        out << QString(". ./version\n");
+        out << QString("clear_resfile\n");
         out << QString("echo \"**********************************************\" >> "+instpath+"/Logs/update.log\n");
         out << QString("echo \"Tools Update started on `date`\" >> "+instpath+"/Logs/update.log\n");
         out << QString("echo \"**********************************************\"  >> "+instpath+"/Logs/update.log\n");
         out << QString("./update_components >> "+instpath+"/Logs/update.log\n");
+        out << QString("exit_ok\n");
     }
     if ( CurrentDevelopment == "Devel" )
     {
         if ( gitrcVersion != rcVersion )
         {
             out << QString("#!/bin/sh\n");
-            out << QString("cd "+instpath+"/Utils\n");
-            out << QString("echo 0 > /tmp/result\n");
+            out << QString("HERE=\""+instpath+"/Utils\"\n");
+            out << QString("cd ${HERE}\n");
+            out << QString(". ./functions.sh\n");
+            out << QString(". ./version\n");
+            out << QString("clear_resfile\n");
             out << QString("echo \"**********************************************\" >> "+instpath+"/Logs/update.log\n");
             out << QString("echo \"Update started on `date`\" >> "+instpath+"/Logs/update.log\n");
             out << QString("echo \"**********************************************\"  >> "+instpath+"/Logs/update.log\n");
             out << QString("./update_all >> "+instpath+"/Logs/update.log\n");
+            out << QString("exit_ok\n");
         }
 
         if ( gitrcToolsVersion != rcToolsVersion )
         {
             out << QString("#!/bin/sh\n");
-            out << QString("cd "+instpath+"/Utils\n");
-            out << QString("echo 0 > /tmp/result\n");
+            out << QString("HERE=\""+instpath+"/Utils\"\n");
+            out << QString("cd ${HERE}\n");
+            out << QString(". ./functions.sh\n");
+            out << QString(". ./version\n");
+            out << QString("clear_resfile\n");
             out << QString("echo \"**********************************************\" >> "+instpath+"/Logs/update.log\n");
             out << QString("echo \"Tools Update started on `date`\" >> "+instpath+"/Logs/update.log\n");
             out << QString("echo \"**********************************************\"  >> "+instpath+"/Logs/update.log\n");
             out << QString("./update_components >> "+instpath+"/Logs/update.log\n");
+            out << QString("exit_ok\n");
         }
     }
 

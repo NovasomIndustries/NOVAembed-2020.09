@@ -455,9 +455,15 @@ void NOVAembed::on_LaunchMenuConfig_pushButton_clicked()
     }
     QTextStream out(&scriptfile);
     out << QString("#!/bin/sh\n");
+    out << QString("#!/bin/sh\n");
+    out << QString("HERE=\""+instpath+"/Utils\"\n");
+    out << QString("cd ${HERE}\n");
+    out << QString(". ./functions.sh\n");
+    out << QString(". ./version\n");
+    out << QString("clear_resfile\n");
     out << QString("cd "+instpath+"/FileSystems/"+FileSystemName+"\n");
     out << QString("make menuconfig\n");
-    out << QString("echo \"0\" > /tmp/result\n");
+    out << QString("exit_ok\n");
 
     scriptfile.close();
     if ( run_script() == 0)
@@ -491,10 +497,14 @@ void NOVAembed::on_LaunchBusyboxMenuConfig_pushButton_clicked()
     }
     QTextStream out(&scriptfile);
     out << QString("#!/bin/sh\n");
+    out << QString("HERE=\""+instpath+"/Utils\"\n");
+    out << QString("cd ${HERE}\n");
+    out << QString(". ./functions.sh\n");
+    out << QString(". ./version\n");
+    out << QString("clear_resfile\n");
     out << QString("cd "+instpath+"/FileSystems/"+FileSystemName+"\n");
     out << QString("make busybox-menuconfig\n");
-    out << QString("echo \"0\" > /tmp/result\n");
-
+    out << QString("exit_ok\n");
     scriptfile.close();
     if ( run_script() == 0)
         update_status_bar("Busybox Configuration Finished");
@@ -539,10 +549,14 @@ void NOVAembed::on_UserAPPSelect_pushButton_clicked()
         }
         QTextStream out(&scriptfile);
         out << QString("#!/bin/sh\n");
+        out << QString("HERE=\""+instpath+"/Utils\"\n");
+        out << QString("cd ${HERE}\n");
+        out << QString(". ./functions.sh\n");
+        out << QString(". ./version\n");
+        out << QString("clear_resfile\n");
         out << QString("cp "+fileinfo.absoluteFilePath()+" "+instpath+"/FileSystems/"+FileSystemName+"/output/target/bin/.\n");
-        out << QString("echo \"0\" > /tmp/result\n");
         out << QString("echo \""+fileinfo.absoluteFilePath()+" stored succesfully\"\n");
-        out << QString("exit 0");
+        out << QString("exit_ok\n");
 
         scriptfile.close();
         if ( run_script() == 0)
