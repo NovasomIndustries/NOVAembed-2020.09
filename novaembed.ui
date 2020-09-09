@@ -133919,7 +133919,7 @@ a PCAP or an external RT touch</string>
        </property>
        <property name="geometry">
         <rect>
-         <x>290</x>
+         <x>190</x>
          <y>240</y>
          <width>91</width>
          <height>16</height>
