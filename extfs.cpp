@@ -27,7 +27,7 @@ extern  QString backup_repo_server;
 //#define     DEBUG_ON    1
 
 #define MAXSRVIMAGES 32
-QString imgFileName[MAXSRVIMAGES] , imgName[MAXSRVIMAGES] , imgVersion[MAXSRVIMAGES] , imgMinimumRequiredSD[MAXSRVIMAGES] , imgDescription[MAXSRVIMAGES] , imgFileSize[MAXSRVIMAGES];
+QString imgFileName[MAXSRVIMAGES] , imgName[MAXSRVIMAGES] , imgVersion[MAXSRVIMAGES] , imgMinimumRequiredSD[MAXSRVIMAGES] , imgDescription[MAXSRVIMAGES] , imgFileSize[MAXSRVIMAGES], imgFirstBootUser[MAXSRVIMAGES], imgFirstBootPassword[MAXSRVIMAGES];
 
 void NOVAembed::ExtListHelper()
 {
@@ -76,7 +76,8 @@ void ServerimageFileHelper(QString distro_name)
         imgMinimumRequiredSD[i] = configServerImages->value( strKeyLocalVersion + "MinimumRequiredSD"+QString::number(i), "r").toString();
         imgDescription[i] = configServerImages->value( strKeyLocalVersion + "Description"+QString::number(i), "r").toString();
         imgFileSize[i] = configServerImages->value( strKeyLocalVersion + "FileSize"+QString::number(i), "r").toString();
-
+        imgFirstBootUser[i] = configServerImages->value( strKeyLocalVersion + "FirstBootUser"+QString::number(i), "r").toString();
+        imgFirstBootPassword[i] = configServerImages->value( strKeyLocalVersion + "FirstBootPassword"+QString::number(i), "r").toString();
     }
     #ifdef DEBUG_ON
     for(i=0;i<MAXSRVIMAGES;i++)
@@ -89,6 +90,8 @@ void ServerimageFileHelper(QString distro_name)
         std::cout << "MinimumRequiredSD " << i << " : " << imgMinimumRequiredSD[i].toLatin1().constData() << "\n" << std::flush;
         std::cout << "Description " << i << " : " << imgDescription[i].toLatin1().constData() << "\n" << std::flush;
         std::cout << "FileSize " << i << " : " << imgFileSize[i].toLatin1().constData() << "\n" << std::flush;
+        std::cout << "FirstBootUser      : " << imgFirstBootUser[i].toLatin1().constData() << "\n" << std::flush;
+        std::cout << "FirstBootPassword  : " << imgFirstBootPassword[i].toLatin1().constData() << "\n" << std::flush;
     }
     #endif
 }
@@ -168,7 +171,18 @@ void NOVAembed::on_ExtFS_Available_comboBox_currentIndexChanged(int index)
         int num = imgFileSize[index].toInt();
         num /= (1024*1024);
         ui->ExtFSFileSize_lineEdit->setText(imgFileSize[index] );
-        ui->MBytesLabel->setText(" bytes ("+QString::number(num)+" MB)");
+        ui->MBytesLabel->setText(" bytes ("+QString::number(num)+" MB), bzip2 compressed");
+        if ( imgFirstBootUser[index] != "r")
+        {
+            ui->ExtFSFirstBootUser_lineEdit->setText(imgFirstBootUser[index]);
+            ui->ExtFSFirstBootPassword_lineEdit->setText(imgFirstBootPassword[index]);
+        }
+        else
+        {
+            ui->ExtFSFirstBootUser_lineEdit->setText("Not needed");
+            ui->ExtFSFirstBootPassword_lineEdit->setText("Not needed");
+        }
+
      }
 }
 
