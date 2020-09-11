@@ -571,6 +571,22 @@ void NOVAembed::on_UserAPPSelect_pushButton_clicked()
 
 void NOVAembed::on_FileSystemDeploy_pushButton_clicked()
 {
+    if ( ! QDir(instpath+"/FileSystems/"+ui->FileSystemSelectedlineEdit->text()).exists() )
+    {
+        QMessageBox mb("Error",
+            "The file system "+ui->FileSystemSelectedlineEdit->text()+" is not present!\n\nPlease generate "+ui->FileSystemSelectedlineEdit->text()+" before pressing Deploy button again.",
+            QMessageBox::NoIcon,
+            QMessageBox::Yes | QMessageBox::Default,
+            QMessageBox::NoButton,
+            QMessageBox::NoButton);
+        mb.exec();
+        ui->FileSystemSelectedlineEdit->setText("");
+
+        update_status_bar("The file system "+ui->FileSystemSelectedlineEdit->text()+" does not exist");
+
+        return;
+    }
+
     if ( ui->FileSystemSelectedlineEdit->text().isEmpty())
     {
         update_status_bar("File system name is empty");
