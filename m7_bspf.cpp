@@ -54,6 +54,8 @@ QString M7_GPIO3_A7_comboBox="GPIO3_A7";    // UART1 CTS
 QString M7_I2C2Speed="100000";
 QString M7_PrimaryVideo_comboBox;
 QString M7_PrimaryVideo_24bit_comboBox;
+QString M7_WiFi_checkbox;
+QString M7_Bt_checkbox;
 
 QString M7_getvalue(QString strKey, QSettings *settings , QString entry)
 {
@@ -66,7 +68,16 @@ QString strKeyFunc("M7_IOMUX/");
     //std::cout << "M7_load_BSPF_File called\n" << std::flush;
 
     on_M7_Clear_pushButton_clicked();
+
     QSettings *func_settings = new QSettings( fileName, QSettings::IniFormat );
+    if ( M7_getvalue(strKeyFunc, func_settings , "M7_WiFi_checkbox") == "false" )
+        ui->M7_WiFi_checkbox->setChecked(false);
+    else
+        ui->M7_WiFi_checkbox->setChecked(true);
+    if ( M7_getvalue(strKeyFunc, func_settings , "M7_Bt_checkbox") == "false" )
+        ui->M7_Bt_checkbox->setChecked(false);
+    else
+        ui->M7_Bt_checkbox->setChecked(true);
     if ( M7_getvalue(strKeyFunc, func_settings , "M7_GPIO3_A1_comboBox") == "SPI_TXD" )
     {
         on_M7_SPI1_checkBox_toggled(true);
@@ -171,6 +182,14 @@ void NOVAembed::M7_save_helper(QString fileName)
         out << QString("M7_PrimaryVideo_24bit_checkBox=true\n");
     else
         out << QString("M7_PrimaryVideo_24bit_checkBox=false\n");
+    if ( ui->M7_WiFi_checkbox->isChecked() )
+        out << QString("M7_WiFi_checkbox=true\n");
+    else
+        out << QString("M7_WiFi_checkbox=false\n");
+    if ( ui->M7_Bt_checkbox->isChecked() )
+        out << QString("M7_Bt_checkbox=true\n");
+    else
+        out << QString("M7_Bt_checkbox=false\n");
 
 
     out << QString("\n[M7_CONF]\n");

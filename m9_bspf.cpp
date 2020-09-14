@@ -65,6 +65,8 @@ QString M9_SPDIF_checkBox;
 QString M9_PCIe_checkBox;
 QString M9_CAM1_checkBox;
 QString M9_CAM2_checkBox;
+QString M9_WiFi_checkbox;
+QString M9_Bt_checkbox;
 
 QString M9_getvalue(QString strKey, QSettings *settings , QString entry)
 {
@@ -77,6 +79,15 @@ QString strKeyFunc("M9_IOMUX/");
 
     on_M9_Clear_pushButton_clicked();
     QSettings *func_settings = new QSettings( fileName, QSettings::IniFormat );
+    if ( M9_getvalue(strKeyFunc, func_settings , "M9_WiFi_checkbox") == "false" )
+        ui->M9_WiFi_checkbox->setChecked(false);
+    else
+        ui->M9_WiFi_checkbox->setChecked(true);
+    if ( M9_getvalue(strKeyFunc, func_settings , "M9_Bt_checkbox") == "false" )
+        ui->M9_Bt_checkbox->setChecked(false);
+    else
+        ui->M9_Bt_checkbox->setChecked(true);
+
     if ( M9_getvalue(strKeyFunc, func_settings , "M9_SPI1_checkBox") == "true" )
     {
         on_M9_SPI1_checkBox_toggled(true);
@@ -288,6 +299,14 @@ void NOVAembed::M9_save_helper(QString fileName)
         out << QString("M9_PCM_checkBox=true\n");
     else
         out << QString("M9_PCM_checkBox=false\n");
+    if ( ui->M9_WiFi_checkbox->isChecked() )
+        out << QString("M9_WiFi_checkbox=true\n");
+    else
+        out << QString("M9_WiFi_checkbox=false\n");
+    if ( ui->M9_Bt_checkbox->isChecked() )
+        out << QString("M9_Bt_checkbox=true\n");
+    else
+        out << QString("M9_Bt_checkbox=false\n");
 
     out << QString("\n[M9_CONF]\n");
     file.close();

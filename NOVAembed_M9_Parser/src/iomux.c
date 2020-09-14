@@ -103,6 +103,14 @@ void parse_iomux(void)
     {
         iomux->cam1 = 1;
     }
+    if ( strstr(file_contents,"M9_WiFi_checkbox=true"))
+    {
+        iomux->wifi = 1;
+    }
+    if ( strstr(file_contents,"M9_Bt_checkbox=true"))
+    {
+        iomux->bt = 1;
+    }
 
 }
 

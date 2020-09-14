@@ -351,7 +351,11 @@
 		wifi_chip_type = \"ap6398\";\n\
 		sdio_vref = <1800>;\n\
 		WIFI,host_wake_irq = <&gpio0 3 GPIO_ACTIVE_HIGH>;/* GPIO0_a3 */\n\
-		status = \"okay\";\n\
+        #ifdef WIFI_ENABLED\n\
+        status = \"okay\";\n\
+        #else\n\
+        status = \"disabled\";\n\
+        #endif\n\
 	};\n\
 \n\
 	rk_bluetooth: wireless-bluetooth {\n\
@@ -367,7 +371,11 @@
 		BT,reset_gpio    = <&gpio0 9 GPIO_ACTIVE_HIGH>; /* GPIO0_B1 */\n\
 		BT,wake_gpio     = <&gpio2 26 GPIO_ACTIVE_HIGH>; /* GPIO2_D2 */\n\
 		BT,wake_host_irq = <&gpio0 4 GPIO_ACTIVE_HIGH>; /* GPIO0_A4 */\n\
-		status = \"okay\";\n\
+        #ifdef BT_ENABLED\n\
+        status = \"okay\";\n\
+        #else\n\
+        status = \"disabled\";\n\
+        #endif\n\
 	};\n\
 };\n\
 \n\

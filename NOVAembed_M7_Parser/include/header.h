@@ -121,7 +121,11 @@
         pinctrl-1 = <&uart0_gpios>;\n\
         BT,power_gpio = <&gpio1 21 GPIO_ACTIVE_HIGH>;\n\
         BT,wake_host_irq = <&gpio1 26 GPIO_ACTIVE_HIGH>;\n\
+        #ifdef BT_ENABLED\n\
+        status = \"okay\";\n\
+        #else\n\
         status = \"disabled\";\n\
+        #endif\n\
     };\n\
     wireless-wlan {\n\
         compatible = \"wlan-platdata\";\n\
@@ -132,7 +136,11 @@
         WIFI,host_wake_irq = <&gpio1 19 GPIO_ACTIVE_HIGH>;\n\
         pinctrl-names = \"default\";\n\
         pinctrl-0 = <&bt_clk>;\n\
+        #ifdef WIFI_ENABLED\n\
         status = \"okay\";\n\
+        #else\n\
+        status = \"disabled\";\n\
+        #endif\n\
     };\n\
 \n\
     ir-receiver {\n\

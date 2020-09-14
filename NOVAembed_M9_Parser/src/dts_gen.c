@@ -18,8 +18,6 @@ char    *duplicate;
 
 void process_peripherals(void)
 {
-char    t[1024];
-int     speed;
 
 }
 
@@ -72,6 +70,15 @@ char    include_string[128],define_string[1024];
         strcat(dtsifile_dump,"#define HAS_CAM1\n");
     if (iomux->hdmi == 1)
         strcat(dtsifile_dump,"#define HAS_HDMI\n");
+    if (iomux->hdmi == 1)
+        strcat(dtsifile_dump,"#define HAS_HDMI\n");
+    if (iomux->hdmi == 1)
+        strcat(dtsifile_dump,"#define HAS_HDMI\n");
+    if (iomux->bt == 1)
+        strcat(dtsifile_dump,"#define BT_ENABLED\n");
+    if (iomux->wifi == 1)
+        strcat(dtsifile_dump,"#define WIFI_ENABLED\n");
+    strcat(dtsifile_dump,"/* #defines end*/\n");
 
     strcat(dtsifile_dump,dtsi_header);
 

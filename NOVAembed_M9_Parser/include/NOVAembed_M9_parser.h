@@ -22,6 +22,8 @@ typedef struct _iomux_cfg
     int pcie;
     int cam0;
     int cam1;
+    int wifi;
+    int bt;
 } iomux_cfg;
 
 

@@ -58,7 +58,14 @@ void create_dts_file(void)
 {
 FILE    *fpout_dts;
 
-    sprintf(dtsfile_dump,dts_header);
+    sprintf(dtsfile_dump,"/* #defines */\n");
+    if (iomux->bt == 1)
+        strcat(dtsfile_dump,"#define BT_ENABLED\n");
+    if (iomux->wifi == 1)
+        strcat(dtsfile_dump,"#define WIFI_ENABLED\n");
+    strcat(dtsfile_dump,"/* #defines end*/\n");
+
+    strcat(dtsfile_dump,dts_header);
     printf("After sprintf %s\n",dtsfile_dump);
     process_peripherals();
     printf("file_name_dts : %s\n",file_name_dts);

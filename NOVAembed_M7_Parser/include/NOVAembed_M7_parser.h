@@ -13,6 +13,8 @@ typedef struct _iomux_cfg
     int i2c2;
     int uart1;
     int uart1_4wires;
+    int bt;
+    int wifi;
 } iomux_cfg;
 
 

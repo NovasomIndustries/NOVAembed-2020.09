@@ -42,6 +42,14 @@ void parse_iomux(void)
         iomux->spi = 1;
     }
 
+    if ( strstr(file_contents,"M7_WiFi_checkbox=true"))
+    {
+        iomux->wifi = 1;
+    }
+    if ( strstr(file_contents,"M7_Bt_checkbox=true"))
+    {
+        iomux->bt = 1;
+    }
     if ( strstr(file_contents,"M7_GPIO2_D1_comboBox=SDA"))
     {
         iomux->i2c2 = 1;
