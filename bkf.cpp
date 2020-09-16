@@ -924,11 +924,20 @@ void NOVAembed::on_StoreGPT_pushButton_clicked()
         update_status_bar("Creating uncompressed GPT "+FileSystemName+".img in Deploy folder");
         compressed="uncompressed";
     }
-
-    if ( ui->UserAutoRun_checkBox->isChecked())
-        out << QString("./dogpt.sh "+NumberOfUserPartitions+" "+UserPartition1Size+" "+UserPartition2Size+" "+fi.baseName()+" "+compressed+" /Devel/NOVAsdk/Deploy/"+FileSystemName+".img "+ui->UserAutoRunSelectedlineEdit->text()+"| tee "+instpath+"/Logs/uSD_Write.log\n");
-    else
-        out << QString("./dogpt.sh "+NumberOfUserPartitions+" "+UserPartition1Size+" "+UserPartition2Size+" "+fi.baseName()+" "+compressed+" /Devel/NOVAsdk/Deploy/"+FileSystemName+".img| tee "+instpath+"/Logs/uSD_Write.log\n");
+    if ( ui->Board_comboBox->currentText() == "M9")
+    {
+        if ( ui->UserAutoRun_checkBox->isChecked())
+            out << QString("./dogptm9.sh "+NumberOfUserPartitions+" "+UserPartition1Size+" "+UserPartition2Size+" "+fi.baseName()+" "+compressed+" /Devel/NOVAsdk/Deploy/"+FileSystemName+".img "+ui->UserAutoRunSelectedlineEdit->text()+"| tee "+instpath+"/Logs/uSD_Write.log\n");
+        else
+            out << QString("./dogptm9.sh "+NumberOfUserPartitions+" "+UserPartition1Size+" "+UserPartition2Size+" "+fi.baseName()+" "+compressed+" /Devel/NOVAsdk/Deploy/"+FileSystemName+".img| tee "+instpath+"/Logs/uSD_Write.log\n");
+    }
+    if ( ui->Board_comboBox->currentText() == "M7")
+    {
+        if ( ui->UserAutoRun_checkBox->isChecked())
+            out << QString("./dogptm7.sh "+NumberOfUserPartitions+" "+UserPartition1Size+" "+UserPartition2Size+" "+fi.baseName()+" "+compressed+" /Devel/NOVAsdk/Deploy/"+FileSystemName+".img "+ui->UserAutoRunSelectedlineEdit->text()+"| tee "+instpath+"/Logs/uSD_Write.log\n");
+        else
+            out << QString("./dogptm7.sh "+NumberOfUserPartitions+" "+UserPartition1Size+" "+UserPartition2Size+" "+fi.baseName()+" "+compressed+" /Devel/NOVAsdk/Deploy/"+FileSystemName+".img| tee "+instpath+"/Logs/uSD_Write.log\n");
+    }
     scriptfile.close();
     if ( run_script() == 0)
     {
@@ -1037,7 +1046,7 @@ void NOVAembed::on_AddFileSystemConfig_pushButton_clicked()
     {
         update_status_bar(fileName+" selected");
     }
-    QFile::copy(instpath+"/FileSystems/"+ui->FileSystemSelectedlineEdit->text()+"/.config", fileName);
+    QFile::copy(instpath+"/FileSystems/"+ui->FileSystemSelectedlineEdit->text()+"/.config", fileName+".config");
     QFile::copy(instpath+"/FileSystems/"+ui->FileSystemSelectedlineEdit->text()+"/BusyBox.config", instpath+"/Utils/Configurations/BusyBox_"+ui->FileSystemSelectedlineEdit->text()+".config");
     compile_NewFileSystemFileSystemConfigurationcomboBox();
 }

@@ -967,6 +967,8 @@ QString thepath;
         }
         if ( ui->Board_comboBox->currentText() == "M7")
         {
+            ui->StoreGPT_pushButton->setEnabled(true);
+            ui->Compress_GPT_Image_checkBox->setEnabled(true);
             ui->FileSystemOnSD_checkBox->setVisible(true);
             ui->FileSystemOnSD_label->setVisible(true);
             ui->UserBSPFSelect_pushButton->setVisible(true);
