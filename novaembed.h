@@ -32,7 +32,7 @@
 #define RK_M9_DEFCONFIG     "novasom_m9_defconfig"
 #define RK_M7_DEFCONFIG     "NOVAsomM7_defconfig"
 #define QUALCOMM_DEFCONFIG  "qcom_defconfig"
-#define NXP_P_DEFCONFIG     "linux-imx6-current_defconfig"
+#define NXP_P_DEFCONFIG     "novasomP_defconfig"
 #define NXP_U_DEFCONFIG     "imx_v7_defconfig"
 
 #define RK_M9_SOURCEME      "SourceMe64plus"
