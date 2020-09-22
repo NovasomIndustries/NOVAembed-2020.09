@@ -20,7 +20,7 @@
 #define RK_M9_KERNEL        "linux-4.4.179_M9"
 #define RK_M7_KERNEL        "linux-4.4.167_M7"
 #define QUALCOMM_KERNEL     "linux-4.11.0-QualcommLinaro"
-#define NXP_P_KERNEL        "linux-imx_4.9.88"
+#define NXP_P_KERNEL        "linux-5.7.19_P"
 #define NXP_U_KERNEL        "linux-imx_4.9.88"
 
 #define RK_M9_KERNEL_BIN    RK_M9_KERNEL+"/arch/arm64/boot/Image"
@@ -32,7 +32,7 @@
 #define RK_M9_DEFCONFIG     "novasom_m9_defconfig"
 #define RK_M7_DEFCONFIG     "NOVAsomM7_defconfig"
 #define QUALCOMM_DEFCONFIG  "qcom_defconfig"
-#define NXP_P_DEFCONFIG     "imx_v7_defconfig"
+#define NXP_P_DEFCONFIG     "linux-imx6-current_defconfig"
 #define NXP_U_DEFCONFIG     "imx_v7_defconfig"
 
 #define RK_M9_SOURCEME      "SourceMe64plus"
@@ -57,6 +57,7 @@
 #define HUM_U5              "N.U-200417-HUM-U5.pdf"
 #define HUM_M7              "N.M7-250518-HUM-M7.pdf"
 #define HUM_M8              "N.M8-091116-HUM-M8.pdf"
+#define HUM_M9              "N.M9-300819-HUM-M9.pdf"
 
 #define SYSTEM_TERMINAL     "tilix"
 #define SYSTEM_EDITOR       "gedit"

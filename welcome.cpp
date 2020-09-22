@@ -150,6 +150,8 @@ void NOVAembed::on_HUM_pushButton_clicked()
         filename = HUM_M7;
     if ( ui->Board_comboBox->currentText() == "M8")
         filename = HUM_M8;
+    if ( ui->Board_comboBox->currentText() == "M9")
+        filename = HUM_M9;
     syscmd = system_pdf_viewer+" "+instpath+"/Doc/"+filename;
     QByteArray ba = syscmd.toLatin1();
     const char *str = ba.data();

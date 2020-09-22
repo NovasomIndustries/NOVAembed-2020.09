@@ -171,12 +171,12 @@
             spdif-controller = <&spdif>;\n\
             spdif-out;\n\
     };\n\
-    sound-hdmi {\n\
+    /*sound-hdmi {\n\
             compatible = \"fsl,imx6q-audio-hdmi\",\n\
                          \"fsl,imx-audio-hdmi\";\n\
             model = \"imx-audio-hdmi\";\n\
             hdmi-controller = <&hdmi_audio>;\n\
-    };\n\
+    };\n*/\
     backlight {\n\
             compatible = \"pwm-backlight\";\n\
             pwms = <&pwm1 0 5000000>;\n\
@@ -317,7 +317,7 @@
         phy-supply = <&reg_3p3v>;\n\
         status = \"okay\";\n\
 };\n\
-&hdmi_core {\n\
+/*&hdmi_core {\n\
         ipu_id = <0>;\n\
         disp_id = <0>;\n\
         status = \"okay\";\n\
@@ -345,6 +345,11 @@
                 reg = <0x50>;\n\
         };\n\
 };\n\
+*/\
+&hdmi {\
+        ddc-i2c-bus = <&i2c1>;\
+        status = \"okay\";\
+};\
 &pwm1 {\n\
         pinctrl-names = \"default\";\n\
         pinctrl-0 = <&pinctrl_pwm1>;\n\

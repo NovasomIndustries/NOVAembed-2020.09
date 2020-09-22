@@ -127,9 +127,13 @@ void NOVAembed::on_KernelXconfig_pushButton_clicked()
     }
     QTextStream out(&scriptfile);
     out << QString("#!/bin/sh\n");
+    out << QString("cd /Devel/NOVAsdk/Utils\n");
+    out << QString(". ./functions.sh\n");
+    out << QString(". ./version\n");
+    out << QString(". ./"+SourceMeFile+"\n");
+    out << QString("clear_resfile\n");
+    out << QString("echo \"\e[32mStart configuration on `date`\e[39m\" | tee "+instpath+"/Logs/kmake.log\n");
     out << QString("cd "+instpath+"/Kernels/"+Kernel+"\n");
-    out << QString(". ../../Utils/"+SourceMeFile+"\n");
-
 
     if ( ui->Board_comboBox->currentText() == "P Series")
         config_file = NXP_P_DEFCONFIG;
@@ -148,6 +152,7 @@ void NOVAembed::on_KernelXconfig_pushButton_clicked()
     }
     out << QString("make xconfig\n");
     out << QString("exit_if_error $? \"make xconfig\"\n");
+    out << QString("exit_ok\n");
     scriptfile.close();
     if ( run_script() == 0)
     {
@@ -226,7 +231,10 @@ void NOVAembed::on_KernelCompile_pushButton_clicked()
         out << QString("cd "+instpath+"/Deploy\n");
         out << QString("rm zImage ; ln -s ../Kernels/"+Kernel+"/arch/arm/boot/zImage\n");
         out << QString("cd "+instpath+"/Utils/nxp\n");
-        out << QString("./kmake "+Kernel+" "+SourceMeFile+" | tee -a "+instpath+"/Logs/kmake.log\n");
+        if ( ui->SkipModuleBuild_checkBox->isChecked())
+            out << QString("./kmake "+Kernel+" "+SourceMeFile+" skip_modules | tee -a "+instpath+"/Logs/kmake.log\n");
+        else
+            out << QString("./kmake "+Kernel+" "+SourceMeFile+" compile_modules | tee -a "+instpath+"/Logs/kmake.log\n");
         out << QString("exit_if_error $? \""+Kernel+"_"+NOVAEMBED_VERSION+"\"\n");
         out << QString("if [ -d "+instpath+"/FileSystems/"+FileSystemName+"/output/target ]; then\n");
         out << QString("    ./modules_install "+instpath+"/Kernels/"+Kernel+" "+instpath+"/FileSystems/"+FileSystemName+" "+SourceMeFile+" | tee -a "+instpath+"/Logs/kmake.log\n");
@@ -351,7 +359,10 @@ void NOVAembed::on_KernelReCompile_pushButton_clicked()
         out << QString("rm zImage ; ln -s ../Kernels/"+Kernel+"/arch/arm/boot/zImage\n");
         out << QString("cd "+instpath+"/Utils/nxp\n");
         config_file = NXP_P_DEFCONFIG;
-        out << QString("./kremake "+Kernel+" "+SourceMeFile+" "+config_file+" | tee -a "+instpath+"/Logs/kmake.log\n");
+        if ( ui->SkipModuleBuild_checkBox->isChecked())
+            out << QString("./kremake "+Kernel+" "+SourceMeFile+" skip_modules "+config_file+" | tee -a "+instpath+"/Logs/kmake.log\n");
+        else
+            out << QString("./kremake "+Kernel+" "+SourceMeFile+" compile_modules "+config_file+" | tee -a "+instpath+"/Logs/kmake.log\n");
     }
     if ( ui->Board_comboBox->currentText() == "U5")
     {

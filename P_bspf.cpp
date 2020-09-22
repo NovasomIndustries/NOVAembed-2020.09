@@ -2121,18 +2121,15 @@ QString ForceClone="CHECK";
     QTextStream out(&scriptfile);
     out << QString("#!/bin/sh\n");
     out << QString("[ ! -d "+instpath+"/DtbUserWorkArea ] && mkdir "+instpath+"/DtbUserWorkArea\n");
-    out << QString("cd "+instpath+"/Utils\n");
-    if ( ui->Board_comboBox->currentText() == "P Series")
-    {
-        out << QString(instpath+"/Qt/NOVAembed/NOVAembed_P_Parser/bin/Debug/NOVAembed_P_Parser "+instpath+"/DtbUserWorkArea/PClass_bspf/temp/"+SDL_FileNameNoExtension+".bspf > "+instpath+"/Logs/P_bspf.log\n");
-        if ( ui->P_EditBeforeGenerate_checkBox->isChecked())
-            out << QString(system_editor+" "+instpath+"/DtbUserWorkArea/"+SDL_FileNameNoExtension+".dtsi\n");
-        out << QString("./user_dtb_compile "+SDL_FileNameNoExtension+" P "+NXP_P_KERNEL+" >> "+instpath+"/Logs/P_bspf.log\n");
-        out << QString(instpath+"/Qt/NOVAembed/NOVAembed_P_Parser/bin/Debug/NOVAembed_P_Parser "+instpath+"/DtbUserWorkArea/PClass_bspf/temp/"+QUAD_FileNameNoExtension+".bspf >> "+instpath+"/Logs/P_bspf.log\n");
-        if ( ui->P_EditBeforeGenerate_checkBox->isChecked())
-            out << QString(system_editor+" "+instpath+"/DtbUserWorkArea/"+QUAD_FileNameNoExtension+".dtsi\n");
-        out << QString("./user_dtb_compile "+QUAD_FileNameNoExtension+" P "+NXP_P_KERNEL+" >> "+instpath+"/Logs/P_bspf.log\n");
-    }
+    out << QString("cd "+instpath+"/Utils/nxp\n");
+    out << QString(instpath+"/Qt/NOVAembed/NOVAembed_P_Parser/bin/Debug/NOVAembed_P_Parser "+instpath+"/DtbUserWorkArea/PClass_bspf/temp/"+SDL_FileNameNoExtension+".bspf | tee "+instpath+"/Logs/P_bspf.log\n");
+    if ( ui->P_EditBeforeGenerate_checkBox->isChecked())
+        out << QString(system_editor+" "+instpath+"/DtbUserWorkArea/"+SDL_FileNameNoExtension+".dtsi\n");
+    out << QString("./user_dtb_compile "+SDL_FileNameNoExtension+" P "+NXP_P_KERNEL+" | tee -a  "+instpath+"/Logs/P_bspf.log\n");
+    out << QString(instpath+"/Qt/NOVAembed/NOVAembed_P_Parser/bin/Debug/NOVAembed_P_Parser "+instpath+"/DtbUserWorkArea/PClass_bspf/temp/"+QUAD_FileNameNoExtension+".bspf | tee -a  "+instpath+"/Logs/P_bspf.log\n");
+    if ( ui->P_EditBeforeGenerate_checkBox->isChecked())
+        out << QString(system_editor+" "+instpath+"/DtbUserWorkArea/"+QUAD_FileNameNoExtension+".dtsi\n");
+    out << QString("./user_dtb_compile "+QUAD_FileNameNoExtension+" P "+NXP_P_KERNEL+" | tee -a  "+instpath+"/Logs/P_bspf.log\n");
 
     scriptfile.close();
     if ( run_script() == 0)

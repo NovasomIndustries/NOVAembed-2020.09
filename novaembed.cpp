@@ -724,6 +724,7 @@ int NOVAembed::update_status_bar(QString StatusBarContent)
 int NOVAembed::CheckIfBootsPresent(QString uboot ,QString atf ,QString binaries , QString force_clone)
 {
 QString ToBeCloned="NO_CLONE";
+QFile scriptfile("/tmp/script");
 
     if ( force_clone != "FORCE")
     {
@@ -745,6 +746,19 @@ QString ToBeCloned="NO_CLONE";
     }
     else
         ToBeCloned="CLONE";
+
+    QTextStream out(&scriptfile);
+    if ( ! scriptfile.open(QIODevice::WriteOnly | QIODevice::Text) )
+    {
+        update_status_bar("Unable to create /tmp/script");
+        return 1;
+    }
+    out << QString("#!/bin/sh\n");
+    out << QString("HERE=\""+instpath+"/Utils\"\n");
+    out << QString("cd ${HERE}\n");
+    out << QString(". ./functions.sh\n");
+    out << QString(". ./version\n");
+    out << QString("clear_resfile\n");
     if ( ToBeCloned == "CLONE" )
     {
         QMessageBox::StandardButton reply = QMessageBox::question(this, "u-boot not present" , "One or more components of "+uboot+"  does not exist or Force Clone checkbox is set so a clone from github will be performed.\nThis can be a time consuming task,\nand depends on your internet connection\nand on remote servers load.\n\nIf you reply \"No\" the correct file cannot be compiled.\n\nDo you want to start the download?", QMessageBox::Yes|QMessageBox::No);
@@ -756,85 +770,78 @@ QString ToBeCloned="NO_CLONE";
             std::cout << "atf      : " << atf.toLatin1().constData() << "\n" << std::flush;
             std::cout << "binaries : " << binaries.toLatin1().constData() << "\n" << std::flush;
             */
-            QFile scriptfile("/tmp/script");
-            if ( ! scriptfile.open(QIODevice::WriteOnly | QIODevice::Text) )
-            {
-                update_status_bar("Unable to create /tmp/script");
-                return 1;
-            }
             update_status_bar("Cloning "+uboot+"...");
-            QTextStream out(&scriptfile);
-            out << QString("#!/bin/sh\n");
-            out << QString("HERE=\""+instpath+"/Utils\"\n");
-            out << QString("cd ${HERE}\n");
-            out << QString(". ./functions.sh\n");
-            out << QString(". ./version\n");
-            out << QString("clear_resfile\n");
             out << QString("cd "+instpath+"/Bootloaders\n");
             out << QString("rm -rf "+uboot+"_"+NOVAEMBED_VERSION+" "+uboot+"\n");
             out << QString("ln -s "+uboot+"_"+NOVAEMBED_VERSION+" "+uboot+"\n");
             out << QString("git clone https://github.com/NovasomIndustries/"+uboot+"_"+NOVAEMBED_VERSION+".git\n");
-            out << QString("exit_if_error $? \""+uboot+"_"+NOVAEMBED_VERSION+"\"\n");
+            out << QString("exit_if_error $? \"Clone of "+uboot+"_"+NOVAEMBED_VERSION+"\"\n");
             if (( atf != "NotNeeded") && ( binaries != "NotNeeded"))
             {
                 out << QString("rm -rf "+atf+"_"+NOVAEMBED_VERSION+" "+atf+"\n");
                 out << QString("ln -s "+atf+"_"+NOVAEMBED_VERSION+" "+atf+"\n");
                 out << QString("git clone https://github.com/NovasomIndustries/"+atf+"_"+NOVAEMBED_VERSION+".git\n");
-                out << QString("exit_if_error $? \""+atf+"_"+NOVAEMBED_VERSION+"\"\n");
+                out << QString("exit_if_error $? \"Clone of "+atf+"_"+NOVAEMBED_VERSION+"\"\n");
                 out << QString("rm -rf "+binaries+"_"+NOVAEMBED_VERSION+" "+binaries+"\n");
                 out << QString("ln -s "+binaries+"_"+NOVAEMBED_VERSION+" "+binaries+"\n");
                 out << QString("git clone https://github.com/NovasomIndustries/"+binaries+"_"+NOVAEMBED_VERSION+".git\n");
-                out << QString("exit_if_error $? \""+binaries+"_"+NOVAEMBED_VERSION+"\"\n");
+                out << QString("exit_if_error $? \"Clone of "+binaries+"_"+NOVAEMBED_VERSION+"\"\n");
             }
             out << QString("cd ${HERE}\n");
-            if ( ui->Board_comboBox->currentText() == "P Series")
-            {
-                out << QString("cd nxp\n");
-                out << QString("./umakeP | tee  "+instpath+"/Logs/umakeP.log\n");
-                out << QString("exit_if_error $? \"Build for "+ui->Board_comboBox->currentText()+"\"| tee -a  "+instpath+"/Logs/umakeP.log\n");
-            }
-            if ( ui->Board_comboBox->currentText() == "U5")
-            {
-                out << QString("cd nxp\n");
-                out << QString("./umakeU | tee  "+instpath+"/Logs/umakeU.log\n");
-                out << QString("exit_if_error $? \"Build for "+ui->Board_comboBox->currentText()+"\"| tee -a  "+instpath+"/Logs/umakeU.log\n");
-            }
-            if ( ui->Board_comboBox->currentText() == "M8")
-            {
-                out << QString("cd qcom\n");
-                out << QString("./umakeM8 | tee "+instpath+"/Logs/umakeM8.log\n");
-                out << QString("exit_if_error $? \"Build for "+ui->Board_comboBox->currentText()+"\"| tee -a  "+instpath+"/Logs/umakeM8.log\n");
-            }
-            if ( ui->Board_comboBox->currentText() == "M7")
-            {
-                out << QString("cd rock\n");
-                out << QString("./umakeM7 | tee "+instpath+"/Logs/umakeM7.log\n");
-                out << QString("exit_if_error $? \"Build for "+ui->Board_comboBox->currentText()+"\"| tee -a  "+instpath+"/Logs/umakeM7.log\n");
-            }
-            if ( ui->Board_comboBox->currentText() == "M9")
-            {
-                out << QString("cd rock\n");
-                out << QString("./umakeM9 | tee "+instpath+"/Logs/umakeM9.log\n");
-                out << QString("exit_if_error $? \"Build for "+ui->Board_comboBox->currentText()+"\"| tee -a  "+instpath+"/Logs/umakeM9.log\n");
-            }
-            out << QString("exit_ok\n");
-            scriptfile.close();
-            if ( run_script() == 0)
-            {
-                update_status_bar("Boot loader for "+ui->Board_comboBox->currentText()+" compiled");
-                BootValid = "OK";
-                ui->BootStatus_label->setPixmap(QPixmap(":/Icons/valid.png"));
-            }
-            else
-            {
-                update_status_bar("Error building boot loader for "+ui->Board_comboBox->currentText());
-                BootValid = "INVALID";
-                ui->BootStatus_label->setPixmap(QPixmap(":/Icons/invalid.png"));
-            }
-            uSD_Write_frame_enable();
-            storeNOVAembed_ini();
         }
     }
+    if ( ui->Board_comboBox->currentText() == "P Series")
+    {
+        QString bootloader=NXP_P_BOOTLOADER;
+        out << QString("cd nxp\n");
+        out << QString("./umakeP "+bootloader+" | tee  "+instpath+"/Logs/umakeP.log\n");
+        out << QString("exit_if_error $? \"Build for "+ui->Board_comboBox->currentText()+"\"| tee -a  "+instpath+"/Logs/umakeP.log\n");
+    }
+    if ( ui->Board_comboBox->currentText() == "U5")
+    {
+        QString bootloader=NXP_U_BOOTLOADER;
+        out << QString("cd nxp\n");
+        out << QString("./umakeU "+bootloader+" | tee  "+instpath+"/Logs/umakeU.log\n");
+        out << QString("exit_if_error $? \"Build for "+ui->Board_comboBox->currentText()+"\"| tee -a  "+instpath+"/Logs/umakeU.log\n");
+    }
+    if ( ui->Board_comboBox->currentText() == "M8")
+    {
+        QString bootloader=QUALCOMM_BOOTLOADER;
+        out << QString("cd qcom\n");
+        out << QString("./umakeM8 "+bootloader+" | tee "+instpath+"/Logs/umakeM8.log\n");
+        out << QString("exit_if_error $? \"Build for "+ui->Board_comboBox->currentText()+"\"| tee -a  "+instpath+"/Logs/umakeM8.log\n");
+    }
+    if ( ui->Board_comboBox->currentText() == "M7")
+    {
+        QString bootloader=RK_M7_BOOTLOADER;
+        out << QString("cd rock\n");
+        out << QString("./umakeM7 "+bootloader+" | tee "+instpath+"/Logs/umakeM7.log\n");
+        out << QString("exit_if_error $? \"Build for "+ui->Board_comboBox->currentText()+"\"| tee -a  "+instpath+"/Logs/umakeM7.log\n");
+    }
+    if ( ui->Board_comboBox->currentText() == "M9")
+    {
+        QString bootloader=RK_M9_BOOTLOADER;
+        out << QString("cd rock\n");
+        out << QString("./umakeM9 "+bootloader+"| tee "+instpath+"/Logs/umakeM9.log\n");
+        out << QString("exit_if_error $? \"Build for "+ui->Board_comboBox->currentText()+"\"| tee -a  "+instpath+"/Logs/umakeM9.log\n");
+    }
+    out << QString("exit_ok\n");
+    scriptfile.close();
+    if ( run_script() == 0)
+    {
+        update_status_bar("Boot loader for "+ui->Board_comboBox->currentText()+" compiled");
+        BootValid = "OK";
+        ui->BootStatus_label->setPixmap(QPixmap(":/Icons/valid.png"));
+    }
+    else
+    {
+        update_status_bar("Error building boot loader for "+ui->Board_comboBox->currentText());
+        BootValid = "INVALID";
+        ui->BootStatus_label->setPixmap(QPixmap(":/Icons/invalid.png"));
+    }
+    uSD_Write_frame_enable();
+    storeNOVAembed_ini();
+
     return 0;
 }
 
