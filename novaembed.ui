@@ -134070,58 +134070,6 @@ a PCAP or an external RT touch</string>
         <string>GB</string>
        </property>
       </widget>
-      <widget class="QLabel" name="label_45">
-       <property name="enabled">
-        <bool>true</bool>
-       </property>
-       <property name="geometry">
-        <rect>
-         <x>10</x>
-         <y>270</y>
-         <width>121</width>
-         <height>16</height>
-        </rect>
-       </property>
-       <property name="text">
-        <string>First Boot User</string>
-       </property>
-      </widget>
-      <widget class="QLineEdit" name="ExtFSFirstBootUser_lineEdit">
-       <property name="geometry">
-        <rect>
-         <x>150</x>
-         <y>270</y>
-         <width>151</width>
-         <height>21</height>
-        </rect>
-       </property>
-      </widget>
-      <widget class="QLabel" name="label_46">
-       <property name="enabled">
-        <bool>true</bool>
-       </property>
-       <property name="geometry">
-        <rect>
-         <x>10</x>
-         <y>300</y>
-         <width>121</width>
-         <height>16</height>
-        </rect>
-       </property>
-       <property name="text">
-        <string>First Boot Password</string>
-       </property>
-      </widget>
-      <widget class="QLineEdit" name="ExtFSFirstBootPassword_lineEdit">
-       <property name="geometry">
-        <rect>
-         <x>150</x>
-         <y>300</y>
-         <width>151</width>
-         <height>21</height>
-        </rect>
-       </property>
-      </widget>
       <widget class="QLabel" name="label_47">
        <property name="enabled">
         <bool>true</bool>

@@ -160,7 +160,6 @@ const char *cmd;
 
 void NOVAembed::on_ExtFS_Available_comboBox_currentIndexChanged(int index)
 {
-    //std::cout << "index = " << index << "\n" << std::flush;
     if ( index >= 0 )
     {
         ui->ExtFSName_lineEdit->setText(imgName[index]);
@@ -172,17 +171,6 @@ void NOVAembed::on_ExtFS_Available_comboBox_currentIndexChanged(int index)
         num /= (1024*1024);
         ui->ExtFSFileSize_lineEdit->setText(imgFileSize[index] );
         ui->MBytesLabel->setText(" bytes ("+QString::number(num)+" MB), bzip2 compressed");
-        if ( imgFirstBootUser[index] != "r")
-        {
-            ui->ExtFSFirstBootUser_lineEdit->setText(imgFirstBootUser[index]);
-            ui->ExtFSFirstBootPassword_lineEdit->setText(imgFirstBootPassword[index]);
-        }
-        else
-        {
-            ui->ExtFSFirstBootUser_lineEdit->setText("Not needed");
-            ui->ExtFSFirstBootPassword_lineEdit->setText("Not needed");
-        }
-
      }
 }
 
