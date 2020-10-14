@@ -207,7 +207,10 @@ void NOVAembed::on_KernelCompile_pushButton_clicked()
         return;
     if ( !QFile(instpath+"/Kernels/"+Kernel+"/.config").exists() )
     {
+        ui->ForceKernelClone_checkBox->setChecked(false);
         on_KernelReCompile_pushButton_clicked();
+        if ( ForceClone=="FORCE")
+            ui->ForceKernelClone_checkBox->setChecked(true);
         return;
     }
 
