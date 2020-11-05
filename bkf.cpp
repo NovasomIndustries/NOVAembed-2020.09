@@ -386,7 +386,14 @@ void NOVAembed::on_KernelReCompile_pushButton_clicked()
         out << QString("rm Image ; ln -s ../Kernels/"+Kernel+"/arch/arm64/boot/Image\n");
         out << QString("cd "+instpath+"/Utils/rock\n");
         config_file = RK_M7_DEFCONFIG;
-        out << QString("./kremakeM7 "+Kernel+" "+SourceMeFile+" "+config_file+" | tee -a "+instpath+"/Logs/kmake.log\n");
+        if ( ui->SkipModuleBuild_checkBox->isChecked())
+        {
+            out << QString("./kremakeM7 "+Kernel+" "+SourceMeFile+" skip_modules "+config_file+" | tee -a "+instpath+"/Logs/kmake.log\n");
+        }
+        else
+        {
+            out << QString("./kremakeM7 "+Kernel+" "+SourceMeFile+" compile_modules "+config_file+" | tee -a "+instpath+"/Logs/kmake.log\n");
+        }
         out << QString("exit_if_error $? \""+Kernel+" "+SourceMeFile+" "+config_file+"\"\n");
         out << QString("if [ -d "+instpath+"/FileSystems/"+FileSystemName+"/output/target ]; then\n");
         out << QString("    rm -rf "+instpath+"/FileSystems/"+FileSystemName+"/output/target/lib/modules/*\n");
@@ -408,7 +415,14 @@ void NOVAembed::on_KernelReCompile_pushButton_clicked()
         out << QString("rm Image ; ln -s ../Kernels/"+Kernel+"/arch/arm64/boot/Image\n");
         out << QString("cd "+instpath+"/Utils/rock\n");
         config_file = RK_M9_DEFCONFIG;
-        out << QString("./kremakeM9 "+Kernel+" "+SourceMeFile+" "+config_file+" | tee -a "+instpath+"/Logs/kmake.log\n");
+        if ( ui->SkipModuleBuild_checkBox->isChecked())
+        {
+            out << QString("./kremakeM9 "+Kernel+" "+SourceMeFile+" skip_modules "+config_file+" | tee -a "+instpath+"/Logs/kmake.log\n");
+        }
+        else
+        {
+            out << QString("./kremakeM9 "+Kernel+" "+SourceMeFile+" compile_modules "+config_file+" | tee -a "+instpath+"/Logs/kmake.log\n");
+        }
         out << QString("if [ -d "+instpath+"/FileSystems/"+FileSystemName+"/output/target ]; then\n");
         out << QString("    rm -rf "+instpath+"/FileSystems/"+FileSystemName+"/output/target/lib/modules/*\n");
         out << QString("    ./modules_install "+instpath+"/Kernels/"+Kernel+" "+instpath+"/FileSystems/"+FileSystemName+" "+SourceMeFile+" | tee -a "+instpath+"/Logs/kmake.log\n");
