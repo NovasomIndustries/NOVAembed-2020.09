@@ -66,7 +66,7 @@ FILE    *fpout_dts;
     strcat(dtsfile_dump,"/* #defines end*/\n");
 
     strcat(dtsfile_dump,dts_header);
-    printf("After sprintf %s\n",dtsfile_dump);
+    printf("DTS Base file\nPlease note : can be different if <Edit before generate> checkbox was checked\n%s\n",dtsfile_dump);
     process_peripherals();
     printf("file_name_dts : %s\n",file_name_dts);
     if ( (fpout_dts = fopen(file_name_dts,"w" ) ))

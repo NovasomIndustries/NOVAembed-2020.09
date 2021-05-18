@@ -372,7 +372,10 @@ void NOVAembed::on_KernelReCompile_pushButton_clicked()
         out << QString("rm zImage ; ln -s ../Kernels/"+Kernel+"/arch/arm/boot/zImage\n");
         out << QString("cd "+instpath+"/Utils/nxp\n");
         config_file = NXP_U_DEFCONFIG;
-        out << QString("./kremake "+Kernel+" "+SourceMeFile+" "+config_file+" | tee -a "+instpath+"/Logs/kmake.log\n");
+        if ( ui->SkipModuleBuild_checkBox->isChecked())
+            out << QString("./kremake "+Kernel+" "+SourceMeFile+" skip_modules "+config_file+" | tee -a "+instpath+"/Logs/kmake.log\n");
+        else
+            out << QString("./kremake "+Kernel+" "+SourceMeFile+" compile_modules "+config_file+" | tee -a "+instpath+"/Logs/kmake.log\n");
     }
     if ( ui->Board_comboBox->currentText() == "M8")
     {
