@@ -36,7 +36,7 @@
      </font>
     </property>
     <property name="currentIndex">
-     <number>0</number>
+     <number>6</number>
     </property>
     <widget class="QWidget" name="tabWelcome">
      <attribute name="title">
@@ -113604,7 +113604,7 @@ a PCAP or an external RT touch</string>
         </font>
        </property>
        <property name="text">
-        <string>GPIO3_A7</string>
+        <string>GPIO1_D0</string>
        </property>
       </widget>
       <widget class="QLabel" name="label_M9_GPIO1_B2">
@@ -133372,7 +133372,7 @@ a PCAP or an external RT touch</string>
         </font>
        </property>
        <property name="text">
-        <string>32K_OUT</string>
+        <string>GPIO2_A0</string>
        </property>
       </widget>
       <widget class="QLabel" name="label_GND2_2">
@@ -133415,7 +133415,7 @@ a PCAP or an external RT touch</string>
         </font>
        </property>
        <property name="text">
-        <string>GPIO2_C1</string>
+        <string>GPIO1_A1</string>
        </property>
       </widget>
       <widget class="QLabel" name="label_M9GPIO0_A0">
@@ -133435,7 +133435,7 @@ a PCAP or an external RT touch</string>
         </font>
        </property>
        <property name="text">
-        <string>GPIO0_A0</string>
+        <string>GPIO1_A03</string>
        </property>
       </widget>
       <widget class="QLabel" name="label_M9GPIO3_A4">
@@ -133455,7 +133455,7 @@ a PCAP or an external RT touch</string>
         </font>
        </property>
        <property name="text">
-        <string>GPIO3_A4</string>
+        <string>GPIO1_A4</string>
        </property>
       </widget>
       <widget class="QLabel" name="label_UVCC3V32_6">
