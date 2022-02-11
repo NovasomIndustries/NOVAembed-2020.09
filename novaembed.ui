@@ -36,7 +36,7 @@
      </font>
     </property>
     <property name="currentIndex">
-     <number>6</number>
+     <number>0</number>
     </property>
     <widget class="QWidget" name="tabWelcome">
      <attribute name="title">
@@ -133435,7 +133435,7 @@ a PCAP or an external RT touch</string>
         </font>
        </property>
        <property name="text">
-        <string>GPIO1_A03</string>
+        <string>GPIO1_A3</string>
        </property>
       </widget>
       <widget class="QLabel" name="label_M9GPIO3_A4">
