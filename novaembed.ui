@@ -113481,7 +113481,7 @@ a PCAP or an external RT touch</string>
         <string>GPIO4_C1</string>
        </property>
       </widget>
-      <widget class="QLabel" name="label_M9GPIO1_C2">
+      <widget class="QLabel" name="label_M9_GPIO1_C2">
        <property name="geometry">
         <rect>
          <x>0</x>
@@ -113524,7 +113524,7 @@ a PCAP or an external RT touch</string>
         <string>GND</string>
        </property>
       </widget>
-      <widget class="QLabel" name="label_M9GPIO1_C6">
+      <widget class="QLabel" name="label_M9_GPIO1_C6">
        <property name="geometry">
         <rect>
          <x>0</x>
@@ -113544,7 +113544,7 @@ a PCAP or an external RT touch</string>
         <string>GPIO1_C6</string>
        </property>
       </widget>
-      <widget class="QLabel" name="label_M9GPIO1_C7">
+      <widget class="QLabel" name="label_M9_GPIO1_C7">
        <property name="geometry">
         <rect>
          <x>0</x>
@@ -113587,7 +113587,7 @@ a PCAP or an external RT touch</string>
         <string>GND</string>
        </property>
       </widget>
-      <widget class="QLabel" name="label_M9GPIO3_A7">
+      <widget class="QLabel" name="label_M9_GPIO3_A7">
        <property name="geometry">
         <rect>
          <x>0</x>
@@ -133355,7 +133355,7 @@ a PCAP or an external RT touch</string>
         <string>GPIO2_B2</string>
        </property>
       </widget>
-      <widget class="QLabel" name="label_M9GPIO4_IO23">
+      <widget class="QLabel" name="label_M9GPIO2_A0">
        <property name="geometry">
         <rect>
          <x>0</x>
@@ -133398,7 +133398,7 @@ a PCAP or an external RT touch</string>
         <string>GND</string>
        </property>
       </widget>
-      <widget class="QLabel" name="label_M9GPIO2_C1">
+      <widget class="QLabel" name="label_M9GPIO2_A1">
        <property name="geometry">
         <rect>
          <x>0</x>
@@ -133418,7 +133418,7 @@ a PCAP or an external RT touch</string>
         <string>GPIO1_A1</string>
        </property>
       </widget>
-      <widget class="QLabel" name="label_M9GPIO0_A0">
+      <widget class="QLabel" name="label_M9GPIO0_A3">
        <property name="geometry">
         <rect>
          <x>0</x>
@@ -133791,6 +133791,84 @@ a PCAP or an external RT touch</string>
       </property>
       <property name="alignment">
        <set>Qt::AlignCenter</set>
+      </property>
+     </widget>
+     <widget class="QLabel" name="label_45">
+      <property name="geometry">
+       <rect>
+        <x>610</x>
+        <y>480</y>
+        <width>311</width>
+        <height>16</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>8</pointsize>
+        <weight>75</weight>
+        <bold>true</bold>
+       </font>
+      </property>
+      <property name="text">
+       <string>* GPIO : 32 * PORT + Index + Bit.</string>
+      </property>
+      <property name="alignment">
+       <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
+      </property>
+      <property name="wordWrap">
+       <bool>true</bool>
+      </property>
+     </widget>
+     <widget class="QLabel" name="label_46">
+      <property name="geometry">
+       <rect>
+        <x>630</x>
+        <y>500</y>
+        <width>281</width>
+        <height>20</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>8</pointsize>
+        <weight>75</weight>
+        <bold>true</bold>
+       </font>
+      </property>
+      <property name="text">
+       <string>I.e. : GPIO3_D5 = 32 * 3 + 24 + 5 = 125</string>
+      </property>
+      <property name="alignment">
+       <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
+      </property>
+      <property name="wordWrap">
+       <bool>true</bool>
+      </property>
+     </widget>
+     <widget class="QLabel" name="label_48">
+      <property name="geometry">
+       <rect>
+        <x>630</x>
+        <y>490</y>
+        <width>281</width>
+        <height>16</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>8</pointsize>
+        <weight>75</weight>
+        <bold>true</bold>
+       </font>
+      </property>
+      <property name="text">
+       <string>Index can be A (0) ,B (8), C (16) or D (24)</string>
+      </property>
+      <property name="alignment">
+       <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
+      </property>
+      <property name="wordWrap">
+       <bool>true</bool>
       </property>
      </widget>
     </widget>
