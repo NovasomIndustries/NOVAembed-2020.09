@@ -305,13 +305,18 @@ void NOVAembed::on_ExtFS_Write_uSD_pushButton_clicked()
     out << QString("cd "+instpath+"/Utils\n");
 
     if ( ui->ExtFSBSPFselectedlineEdit->text() == "")
-        out << QString("./flash_extfs /dev/"+ui->ExtFS_uSD_Device_comboBox->currentText()+"  "+full_path+" > "+instpath+"/Logs/extfs.log \n");
+    {
+        if ( ui->Board_comboBox->currentText() == "P Series")
+            out << QString("./flash_extfs P /dev/"+ui->ExtFS_uSD_Device_comboBox->currentText()+"  "+full_path+" > "+instpath+"/Logs/extfs.log \n");
+        else
+            out << QString("./flash_extfs "+ui->Board_comboBox->currentText()+" /dev/"+ui->ExtFS_uSD_Device_comboBox->currentText()+"  "+full_path+" > "+instpath+"/Logs/extfs.log \n");
+    }
     else
     {
         if ( ui->Board_comboBox->currentText() == "P Series")
-            out << QString("./flash_extfs /dev/"+ui->ExtFS_uSD_Device_comboBox->currentText()+" "+full_path+" "+"SDL_"+fi.baseName()+".dtb"+" "+"QUAD_"+fi.baseName()+".dtb"+" > "+instpath+"/Logs/extfs.log \n");
+            out << QString("./flash_extfs P /dev/"+ui->ExtFS_uSD_Device_comboBox->currentText()+" "+full_path+" "+"SDL_"+fi.baseName()+".dtb"+" "+"QUAD_"+fi.baseName()+".dtb"+" > "+instpath+"/Logs/extfs.log \n");
         else
-            out << QString("./flash_extfs /dev/"+ui->ExtFS_uSD_Device_comboBox->currentText()+" "+full_path+" "+fi.baseName()+".dtb"+" > "+instpath+"/Logs/extfs.log \n");
+            out << QString("./flash_extfs "+ui->Board_comboBox->currentText()+" /dev/"+ui->ExtFS_uSD_Device_comboBox->currentText()+" "+full_path+" "+fi.baseName()+".dtb"+" > "+instpath+"/Logs/extfs.log \n");
     }
     scriptfile.close();
     update_status_bar("Writing image "+ui->ExtFS_comboBox->currentText()+" ...");

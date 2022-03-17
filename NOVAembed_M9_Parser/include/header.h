@@ -1470,12 +1470,16 @@
 };\n\
 #ifdef HAS_I2C3\n\
 &i2c3 {\n\
+	clock-frequency = <100000>;\n\
 	status = \"okay\";\n\
 };\n\
 #endif\n\
 \n\
 #ifdef HAS_I2C6\n\
 &i2c6 {\n\
+    i2c-scl-rising-time-ns = <450>;\n\
+    i2c-scl-falling-time-ns = <15>;\n\
+    clock-frequency = <400000>;\n\
 	status = \"okay\";\n\
 };\n\
 #endif\n\

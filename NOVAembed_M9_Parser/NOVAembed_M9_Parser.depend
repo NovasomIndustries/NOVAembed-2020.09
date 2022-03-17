@@ -20,3 +20,24 @@
 	"../include/NOVAembed_M9_parser.h"
 	"../include/header.h"
 
+1643985964 source:/Devel/NOVAsdk2020.09/Qt/NOVAembed-2020.09/NOVAembed_M9_Parser/src/dts_gen.c
+	"../include/NOVAembed_M9_parser.h"
+	"../include/header.h"
+
+1643985964 /Devel/NOVAsdk2020.09/Qt/NOVAembed-2020.09/NOVAembed_M9_Parser/include/NOVAembed_M9_parser.h
+	<stdio.h>
+	<stdlib.h>
+	<strings.h>
+	<string.h>
+	<libgen.h>
+
+1646232014 /Devel/NOVAsdk2020.09/Qt/NOVAembed-2020.09/NOVAembed_M9_Parser/include/header.h
+	<dt-bindings/input/input.h>
+
+1644829069 source:/Devel/NOVAsdk2020.09/Qt/NOVAembed-2020.09/NOVAembed_M9_Parser/src/iomux.c
+	"../include/NOVAembed_M9_parser.h"
+
+1643985964 source:/Devel/NOVAsdk2020.09/Qt/NOVAembed-2020.09/NOVAembed_M9_Parser/src/main.c
+	"../include/NOVAembed_M9_parser.h"
+	"../include/header.h"
+
